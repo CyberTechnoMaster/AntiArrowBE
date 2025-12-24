@@ -51,14 +51,25 @@ async function loadDashboard() {
             return;
         }
 
-        const users = await res.json();
-        renderUsers(users);
+        const data = await res.json();
+        if (!res.ok) {
+            renderUsers(data); // Will trigger the !Array.isArray check and show error
+            return;
+        }
+
+        renderUsers(data);
     } catch (err) {
         console.error('Error loading dashboard:', err);
+        userTbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Connection error</td></tr>';
     }
 }
 
 function renderUsers(users) {
+    if (!Array.isArray(users)) {
+        console.error('Expected array of users, received:', users);
+        userTbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error loading users</td></tr>';
+        return;
+    }
     userTbody.innerHTML = '';
     let onlineCount = 0;
     const now = new Date();
@@ -79,6 +90,11 @@ function renderUsers(users) {
             <td>${user.username}</td>
             <td>${user.level}</td>
             <td>${user.experience}</td>
+            <td>
+                ${user.levelCompletions && user.levelCompletions.length > 0
+                ? user.levelCompletions.slice(0, 3).map(lc => `L${lc.level}:${lc.timeInSec}s`).join(', ')
+                : 'N/A'}
+            </td>
             <td>${formatDate(user.lastActivity)}</td>
             <td><span class="role-badge ${user.role === 'admin' ? 'role-admin' : ''}">${user.role}</span></td>
         `;

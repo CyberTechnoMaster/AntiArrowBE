@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AntiArrow | Hall of Fame</title>
+    <link rel="stylesheet" href="records.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="glass-bg"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Anti<span>Arrow</span></h1>
+            </div>
+            <nav class="nav-links">
+                <a href="/">Login</a>
+                <a href="/admin.html">Admin</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="records-section">
+                <div class="section-header">
+                    <h2>Hall of Fame</h2>
+                    <p>All-time fastest completion records (Level 10+)</p>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Level</th>
+                                <th>Record Holder</th>
+                                <th>Fastest Time</th>
+                                <th>Achieved At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="records-tbody">
+                            <!-- Data injected here -->
+                        </tbody>
+                    </table>
+                    <div id="no-data-msg" class="no-data" style="display: none;">
+                        No records have been set yet. Be the first!
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="records.js"></script>
+</body>
+
+</html>

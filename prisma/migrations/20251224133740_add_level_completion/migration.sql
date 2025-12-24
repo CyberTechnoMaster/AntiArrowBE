@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "LevelCompletion" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "level" INTEGER NOT NULL,
+    "timeInSec" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "LevelCompletion_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

@@ -8,12 +8,32 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  username    String   @unique
-  passwordHash String
-  level       Int      @default(1)
-  experience  Int      @default(0)
-  lastLogin   DateTime @default(now())
-  role        String   @default("user")
-  lastActivity DateTime @default(now())
+  id               Int               @id @default(autoincrement())
+  username         String            @unique
+  passwordHash     String
+  level            Int               @default(1)
+  experience       Int               @default(0)
+  lastLogin        DateTime          @default(now())
+  role             String            @default("user")
+  lastActivity     DateTime          @default(now())
+  levelCompletions LevelCompletion[]
+  bestTimes        BestTime[]
+}
+
+model LevelCompletion {
+  id        Int      @id @default(autoincrement())
+  level     Int
+  timeInSec Int
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model BestTime {
+  level     Int      @id
+  timeInSec Int
+  username  String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  updatedAt DateTime @updatedAt
 }
